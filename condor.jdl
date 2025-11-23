@@ -3,12 +3,10 @@ executable = fullsim.sh
 getenv = True
 
 Should_Transfer_Files = Yes
-# arguments = $(Process)
-arguments = $(chunknum)
+arguments = $(Process)
 Transfer_Input_Files = fullsim.sh,gen.py,sim.py,digi2raw.py,hlt.py,reco.py,pat.py
-# Transfer_Output_Files = JME-RunIISummer20UL17MiniAODv2-$(Process).root
-Transfer_Output_Files = JME-RunIISummer20UL17MiniAODv2-$(chunknum).root
-output_destination = root://eosuser.cern.ch//eos/user/z/zhye/pp6j/
+Transfer_Output_Files = JME-RunIISummer20UL17MiniAODv2-$(Process).root
+output_destination = root://eosuser.cern.ch//eos/user/z/zhye/pp6j/MadGraph/dr04/
 
 output = log/$(Cluster)_$(Process).out
 error = log/$(Cluster)_$(Process).err
@@ -20,5 +18,5 @@ x509userproxy = x509up
 +RequestMemory = 10240
 max_retries = 2
 requirements = Machine =!= LastRemoteHost
-# queue 1000
-queue chunknum from chunk.txt
+queue 1000
+# queue chunknum from chunk.txt

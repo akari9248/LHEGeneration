@@ -84,7 +84,7 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '106X_mc2017_realistic_v6', '')
 
-base_path = '/eos/home-s/shuangyu/public/events_pp6j/'
+base_path = '/eos/home-s/shuangyu/public/events_pp6j_DR4/'
 lhe_file = 'chunk{}.lhe'.format(options.chunknum)
 lhe_file_path = os.path.join(base_path, lhe_file)
 # if options.inputLHE != '':
@@ -114,20 +114,14 @@ process.generator = cms.EDFilter("Pythia8ConcurrentGeneratorFilter",
         ),
         pythia8CP5Settings = cms.vstring(
             'Tune:pp 14', 
-            'Tune:ee 7', 
-            'MultipartonInteractions:ecmPow=0.03344', 
-            'MultipartonInteractions:bProfile=2', 
-            'MultipartonInteractions:pT0Ref=1.41', 
-            'MultipartonInteractions:coreRadius=0.7634', 
-            'MultipartonInteractions:coreFraction=0.63', 
+            'Tune:ee 7',
+	    'PartonLevel:MPI=off', 
             'ColourReconnection:range=5.176', 
             'SigmaTotal:zeroAXB=off', 
             'SpaceShower:alphaSorder=2', 
             'SpaceShower:alphaSvalue=0.118', 
             'SigmaProcess:alphaSvalue=0.118', 
             'SigmaProcess:alphaSorder=2', 
-            'MultipartonInteractions:alphaSvalue=0.118', 
-            'MultipartonInteractions:alphaSorder=2', 
             'TimeShower:alphaSorder=2', 
             'TimeShower:alphaSvalue=0.118', 
             'SigmaTotal:mode = 0', 
@@ -159,12 +153,12 @@ process.generator = cms.EDFilter("Pythia8ConcurrentGeneratorFilter",
         JetMatchingParameters = cms.vstring(
             'JetMatching:setMad = off',
             'JetMatching:scheme = 1',
-            'JetMatching:merge = on',
+            'JetMatching:merge = off',
             'JetMatching:jetAlgorithm = 2',
             'JetMatching:etaJetMax = 5.',
             'JetMatching:coneRadius = 1.',
-            'JetMatching:slowJetPower = 1',
-            'JetMatching:qCut = 20.',            # this is the actual merging scale
+            'JetMatching:slowJetPower = -1',
+            'JetMatching:qCut = 10.',            # this is the actual merging scale
             'JetMatching:nQmatch = 5',           # 4 corresponds to 4-flavour scheme (no matching of b-quarks), 5 for 5-flavour scheme
             'JetMatching:nJetMax = 6',           # number of partons in born matrix element for highest multiplicity
             'JetMatching:doShowerKt = off',      # off for MLM matching, turn on for shower-kT matching
